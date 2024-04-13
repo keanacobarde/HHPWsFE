@@ -10,38 +10,40 @@ function Home() {
   const router = useRouter();
 
   return (
-    <Box
-      display="flex"
-      sx={{ width: '100%' }}
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Stack
-        direction="column"
+    <main>
+      <Box
+        display="flex"
+        sx={{ width: '100%' }}
         justifyContent="center"
-        alignContent="center"
-        spacing={2}
+        alignItems="center"
       >
-        <Typography
-          component="h1"
-          variant="h3"
-          align="center"
-          color="text.primary"
-          gutterBottom
+        <Stack
+          direction="column"
+          justifyContent="center"
+          alignContent="center"
+          spacing={2}
         >
-          Hello, {user.fbUser.displayName}
-        </Typography>
-        <Button variant="contained" color="primary" onClick={() => router.push('/orders')}>
-          View Orders
-        </Button>
-        <Button variant="contained" color="primary" onClick={() => router.push('/orders/new')}>
-          Create Orders
-        </Button>
-        <Button variant="contained" color="primary" onClick={() => router.push('/revenue')}>
-          Revenue
-        </Button>
-      </Stack>
-    </Box>
+          <Typography
+            component="h1"
+            variant="h3"
+            align="center"
+            color="text.primary"
+            gutterBottom
+          >
+            Hello, {user.fbUser.displayName}
+          </Typography>
+          <Button variant="contained" color="primary" onClick={() => router.push('/orders')}>
+            View Orders
+          </Button>
+          <Button variant="contained" color="primary" onClick={() => router.push('/orders/new')}>
+            Create Orders
+          </Button>
+          <Button variant="contained" color="primary" onClick={() => router.push('/revenue')}>
+            Revenue
+          </Button>
+        </Stack>
+      </Box>
+    </main>
   );
 }
 
