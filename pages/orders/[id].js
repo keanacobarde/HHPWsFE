@@ -25,8 +25,6 @@ function OrderDetails() {
     getAllTheOrderItems();
   }, []);
 
-  console.warn(id, order, items);
-
   return (
     <Stack
       spacing={2}
