@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import {
+  Box, Button, Stack, Typography,
+} from '@mui/material';
 import { useRouter } from 'next/router';
 import { getAllOrdersById, getItemsFromOrderId } from '../../API/OrderData';
 import ItemCard from '../../components/Cards/ItemCard';
@@ -50,6 +52,8 @@ function OrderDetails() {
         alignItems="start"
       >
         {items?.map((item) => <ItemCard itemObj={item} />)}
+        <Button variant="contained">Add Item</Button>
+        <Button variant="contained"> Go to Payment </Button>
       </Box>
     </Stack>
   );

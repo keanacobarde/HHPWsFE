@@ -12,7 +12,7 @@ function ItemCard({ itemObj }) {
   return (
     <Grid item xs={8} sm={6}>
       <Card
-        sx={{ display: 'flex', width: '100%' }}
+        sx={{ display: 'flex', width: '25rem' }}
       >
         <CardContent sx={{ flexGrow: 1 }}>
           <Typography gutterBottom variant="h5" component="h2">
