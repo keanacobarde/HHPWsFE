@@ -2,10 +2,13 @@ import Stack from '@mui/material/Stack';
 import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useRouter } from 'next/router';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   const { user } = useAuth();
+  const router = useRouter();
+
   return (
     <Box
       display="flex"
@@ -28,13 +31,13 @@ function Home() {
         >
           Hello, {user.fbUser.displayName}
         </Typography>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={() => router.push('/orders')}>
           View Orders
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={() => router.push('/orders/new')}>
           Create Orders
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={() => router.push('/revenue')}>
           Revenue
         </Button>
       </Stack>

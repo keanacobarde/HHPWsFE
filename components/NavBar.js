@@ -47,7 +47,6 @@ export default function NavBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -56,6 +55,7 @@ export default function NavBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
+            onClick={() => router.push('/')}
           >
             HIP HOP PIZZA & WANGS
           </Typography>
@@ -102,13 +102,13 @@ export default function NavBar() {
           }}
           >
             <Button
-              onClick={() => router.push('/')}
+              onClick={() => router.push('/orders')}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               View Orders
             </Button>
             <Button
-              onClick={() => router.push('/timeline')}
+              onClick={() => router.push('/orders/new')}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
               Create an Order
