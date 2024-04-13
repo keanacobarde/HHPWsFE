@@ -22,7 +22,18 @@ const getAllOrdersById = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getItemsFromOrderId = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/orders/${id}/items`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((resp) => resolve(resp.json()))
+    .catch(reject);
+});
+
 export {
   getAllOrders,
   getAllOrdersById,
+  getItemsFromOrderId,
 };
