@@ -19,4 +19,15 @@ a {
 
 body {
   background-color: #CBD5E1;
+  display: grid;
+  grid-template-rows: 100vh;
+}
+
+.container {
+  display: flex;
+  direction: row;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  padding-top: 1rem;
 }
