@@ -14,7 +14,7 @@ function OrderCard({ orderObj }) {
   return (
     <Grid item xs={8} sm={6}>
       <Card
-        sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+        sx={{ display: 'flex', width: '100%' }}
       >
         <CardContent sx={{ flexGrow: 1 }}>
           <Typography gutterBottom variant="h5" component="h2">
