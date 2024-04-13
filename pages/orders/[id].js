@@ -29,7 +29,6 @@ function OrderDetails() {
 
   return (
     <Stack
-      sx={{ mt: 4 }}
       spacing={2}
       direction="column"
       justifyContent="center"
@@ -47,7 +46,7 @@ function OrderDetails() {
         display="grid"
         sx={{ width: '100%' }}
         gridTemplateColumns="repeat(2, 1fr)"
-        gridTemplateRows="repeat(8, 1fr)"
+        gridTemplateRows="repeat(4, 1fr)"
         gap="0.5rem"
         alignItems="start"
       >
