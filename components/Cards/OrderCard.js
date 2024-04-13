@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { useRouter } from 'next/router';
 import {
   IconButton,
@@ -36,6 +37,9 @@ function OrderCard({ orderObj }) {
         <CardActions>
           <IconButton aria-label="delete" onClick={deleteThisOrder}>
             <DeleteIcon />
+          </IconButton>
+          <IconButton aria-label="delete" onClick={() => router.push('/')}>
+            <EditIcon />
           </IconButton>
           <Button size="small" onClick={() => router.push(`/orders/${orderObj.id}}`)}>View Details</Button>
         </CardActions>
