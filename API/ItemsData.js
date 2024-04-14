@@ -12,6 +12,4 @@ const getAllItems = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export default {
-  getAllItems,
-};
+export default getAllItems;
