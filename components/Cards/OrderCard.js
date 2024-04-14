@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useRouter } from 'next/router';
 import {
   IconButton,
-  Card, Grid, CardActions, CardContent, Typography, Button,
+  Card, Grid, CardContent, Typography, Button,
 } from '@mui/material';
 
 function OrderCard({ orderObj }) {
@@ -33,16 +33,14 @@ function OrderCard({ orderObj }) {
           <Typography>
             {orderObj.orderType}
           </Typography>
-        </CardContent>
-        <CardActions>
           <IconButton aria-label="delete" onClick={deleteThisOrder}>
             <DeleteIcon />
           </IconButton>
           <IconButton aria-label="delete" onClick={() => router.push('/')}>
             <EditIcon />
           </IconButton>
-          <Button size="small" onClick={() => router.push(`/orders/${orderObj.id}}`)}>View Details</Button>
-        </CardActions>
+          <Button size="small" onClick={() => router.push(`/orders/${orderObj.id}`)}>View Details</Button>
+        </CardContent>
       </Card>
     </Grid>
   );
