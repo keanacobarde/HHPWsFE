@@ -15,7 +15,7 @@ function ItemCard({
     if (window.confirm(`Delete ${itemObj.name}?`)) {
       const payload = {
         orderId,
-        orderItemId: itemObj.id,
+        orderItemId: itemObj.orderItemId,
       };
       deleteItemFromOrder(payload).then(() => onUpdate());
     }
@@ -53,6 +53,7 @@ function ItemCard({
 ItemCard.propTypes = {
   itemObj: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    orderItemId: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
