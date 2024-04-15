@@ -44,12 +44,13 @@ function OrderDetails() {
         display="grid"
         sx={{ width: '100%' }}
         gridTemplateColumns="repeat(2, 1fr)"
-        gridTemplateRows="repeat(4, 1fr)"
+        gridTemplateRows="repeat(2, 1fr)"
         gap="0.5rem"
         alignItems="start"
       >
-        {items?.map((item) => <ItemCard itemObj={item} />)}
-        <Button variant="contained">Add Item</Button>
+        {items[0]?.items?.map((item) => <ItemCard itemObj={item} context="orderdetails" orderId={parseInt(id, 10)} onUpdate={getAllTheOrderItems} />)}
+        <footer />
+        <Button variant="contained" onClick={() => router.push(`/Items/${id}`)}>Add Item</Button>
         <Button variant="contained"> Go to Payment </Button>
       </Box>
     </Stack>
