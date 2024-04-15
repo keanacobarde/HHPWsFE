@@ -6,9 +6,21 @@ import {
   IconButton,
   Card, Grid, CardContent, Typography,
 } from '@mui/material';
+import deleteItemFromOrder from '../../API/OrderItemData';
 
-function ItemCard({ itemObj, context }) {
-  const deleteThisItem = () => {};
+function ItemCard({
+  itemObj, context, orderId, onUpdate,
+}) {
+  const deleteThisItem = () => {
+    if (window.confirm(`Delete ${itemObj.name}?`)) {
+      const payload = {
+        orderId,
+        orderItemId: itemObj.id,
+      };
+      deleteItemFromOrder(payload).then(() => onUpdate());
+    }
+  };
+
   const addItemToOrder = () => {};
 
   return (
@@ -45,6 +57,12 @@ ItemCard.propTypes = {
     price: PropTypes.number.isRequired,
   }).isRequired,
   context: PropTypes.string.isRequired,
+  orderId: PropTypes.number.isRequired,
+  onUpdate: PropTypes.func,
+};
+
+ItemCard.defaultProps = {
+  onUpdate: () => {},
 };
 
 export default ItemCard;

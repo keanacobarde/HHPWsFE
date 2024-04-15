@@ -25,6 +25,8 @@ function OrderDetails() {
     getAllTheOrderItems();
   }, []);
 
+  console.warn(items[0]?.items);
+
   return (
     <Stack
       spacing={2}
@@ -48,7 +50,7 @@ function OrderDetails() {
         gap="0.5rem"
         alignItems="start"
       >
-        {items?.map((item) => <ItemCard itemObj={item} context="orderdetails" />)}
+        {items[0]?.items?.map((item) => <ItemCard itemObj={item} context="orderdetails" orderId={parseInt(id, 10)} onUpdate={getAllTheOrderItems} />)}
         <Button variant="contained" onClick={() => router.push(`/Items/${id}`)}>Add Item</Button>
         <Button variant="contained"> Go to Payment </Button>
       </Box>
