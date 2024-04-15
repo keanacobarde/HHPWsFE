@@ -23,7 +23,7 @@ function OrderDetails() {
   useEffect(() => {
     getTheOrder();
     getAllTheOrderItems();
-  }, [items]);
+  }, []);
 
   return (
     <Stack

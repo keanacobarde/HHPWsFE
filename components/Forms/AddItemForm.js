@@ -17,7 +17,6 @@ function AddItemToOrderForm({ orderId }) {
     getAllTheItems();
   }, []);
 
-  console.warn(orderId, items);
   return (
     <Stack
       spacing={2}
@@ -41,7 +40,7 @@ function AddItemToOrderForm({ orderId }) {
         gap="0.5rem"
         alignItems="start"
       >
-        {items?.map((item) => <ItemCard itemObj={item} context="additems" />)}
+        {items?.map((item) => <ItemCard itemObj={item} context="additems" orderId={orderId} />)}
       </Box>
     </Stack>
   );

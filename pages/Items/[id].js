@@ -7,7 +7,7 @@ function AddItems() {
   const { id } = router.query;
 
   return (
-    <AddItemToOrderForm orderId={id} />
+    <AddItemToOrderForm orderId={parseInt(id, 10)} />
   );
 }
 
