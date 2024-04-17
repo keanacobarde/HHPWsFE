@@ -15,7 +15,7 @@ function OrderForm() {
   return (
     <>
       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" sx={{ mb: 3 }}>
           CREATE AN ORDER
         </Typography>
         <Grid container spacing={2}>
