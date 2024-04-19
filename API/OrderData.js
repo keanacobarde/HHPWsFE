@@ -64,6 +64,17 @@ const deleteOrder = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const editOrder = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/orders/${payload.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  }).then(resolve)
+    .catch(reject);
+});
+
 export {
   getAllOrders,
   getAllOrdersById,
@@ -71,4 +82,5 @@ export {
   orderToEditInfo,
   deleteOrder,
   createOrder,
+  editOrder,
 };

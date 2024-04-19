@@ -7,13 +7,14 @@ import { Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
-import { createOrder } from '../../API/OrderData';
+import { createOrder, editOrder } from '../../API/OrderData';
 
 const initialState = {
   name: '',
   phone: '',
   email: '',
   orderType: '',
+  status: true,
 };
 
 const orderTypes = ['Dine-in', 'Pickup', 'Delivery'];
@@ -22,9 +23,23 @@ function OrderForm({ orderObj }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
 
+  useEffect(() => {
+    if (orderObj !== initialState) {
+      setFormInput(orderObj);
+    }
+  }, [orderObj]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    createOrder(formInput).then(() => router.push('/'));
+    if (orderObj !== initialState) {
+      const payload = {
+        ...formInput,
+        id: orderObj.id,
+      };
+      editOrder(payload).then(() => router.push('/'));
+    } else {
+      createOrder(formInput).then(() => router.push('/orders'));
+    }
   };
 
   const handleChange = (e) => {
@@ -34,12 +49,6 @@ function OrderForm({ orderObj }) {
       [name]: value,
     }));
   };
-
-  useEffect(() => {
-    if (orderObj !== initialState) {
-      setFormInput(orderObj);
-    }
-  }, [orderObj]);
 
   return (
     <>
