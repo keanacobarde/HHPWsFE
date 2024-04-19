@@ -1,16 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 
-function PaymentInfoForm() {
+const initialState = {
+  tip: '',
+  paymentType: '',
+};
+
+const paymentTypes = ['Credit Card', 'Debit', 'Cash'];
+
+function PaymentInfoForm({ paymentInfoObj }) {
+  const [formInput, setFormInput] = useState(initialState);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = () => {};
+
+  useEffect(() => {
+    if (paymentInfoObj !== initialState) {
+      setFormInput(paymentInfoObj);
+    }
+  }, [paymentInfoObj]);
+
   return (
     <>
       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -21,28 +43,31 @@ function PaymentInfoForm() {
           <Grid item xs={12} sm={6}>
             <TextField
               autoComplete="given-name"
-              name="firstName"
+              name="tip"
               required
               fullWidth
               id="customerName"
               label="Tip Amount"
               autoFocus
+              value={formInput.tip}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Payment Type</InputLabel>
-              <Select
-                required
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Order Type"
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
+            <TextField
+              margin="dense"
+              id="name"
+              type="text"
+              name="paymentType"
+              fullWidth
+              variant="standard"
+              label="Payment Type"
+              value={formInput.paymentType}
+              onChange={handleChange}
+              select
+            >
+              {paymentTypes.map((pt) => <MenuItem key={pt} value={pt}> {pt} </MenuItem>)}
+            </TextField>
           </Grid>
           <Grid item xs={12}>
             <Button variant="contained"> Close Order </Button>
@@ -52,5 +77,16 @@ function PaymentInfoForm() {
     </>
   );
 }
+
+PaymentInfoForm.propTypes = {
+  paymentInfoObj: PropTypes.shape({
+    tip: PropTypes.number,
+    paymentType: PropTypes.string,
+  }),
+};
+
+PaymentInfoForm.defaultProps = {
+  paymentInfoObj: initialState,
+};
 
 export default PaymentInfoForm;

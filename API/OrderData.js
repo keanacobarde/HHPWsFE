@@ -32,8 +32,30 @@ const getItemsFromOrderId = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const orderToEditInfo = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/order/edit/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((resp) => resolve(resp.json()))
+    .catch(reject);
+});
+
+const deleteOrder = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/orders/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((resp) => resolve(resp.json()))
+    .catch(reject);
+});
+
 export {
   getAllOrders,
   getAllOrdersById,
   getItemsFromOrderId,
+  orderToEditInfo,
+  deleteOrder,
 };

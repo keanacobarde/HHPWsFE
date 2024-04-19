@@ -38,7 +38,7 @@ function OrderDetails() {
         color="text.primary"
         gutterBottom
       >
-        Total: ${order.subtotal}
+        Total: ${order?.subtotal}
       </Typography>
       <Box
         display="grid"

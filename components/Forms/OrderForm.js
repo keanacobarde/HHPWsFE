@@ -1,16 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 
-function OrderForm() {
+const initialState = {
+  name: '',
+  phone: '',
+  email: '',
+  orderType: '',
+};
+
+const orderTypes = ['Dine-in', 'Pickup', 'Delivery'];
+
+function OrderForm({ orderObj }) {
+  const [formInput, setFormInput] = useState(initialState);
+
   const handleSubmit = () => {};
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    if (orderObj !== initialState) {
+      setFormInput(orderObj);
+    }
+  }, [orderObj]);
 
   return (
     <>
@@ -22,22 +45,26 @@ function OrderForm() {
           <Grid item xs={12} sm={6}>
             <TextField
               autoComplete="given-name"
-              name="firstName"
+              name="name"
               required
               fullWidth
               id="customerName"
               label="Customer Name"
               autoFocus
+              value={formInput.name}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               required
               fullWidth
-              id="lastName"
+              id="phone"
               label="Customer Phone"
-              name="lastName"
+              name="phone"
               autoComplete="family-name"
+              value={formInput.phone}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -48,33 +75,25 @@ function OrderForm() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              value={formInput.email}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              required
+              margin="dense"
+              id="name"
+              type="text"
+              name="orderType"
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="new-password"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Order Type</InputLabel>
-              <Select
-                required
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Order Type"
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
+              variant="standard"
+              label="Order Type"
+              value={formInput.orderType}
+              onChange={handleChange}
+              select
+            >
+              {orderTypes.map((pt) => <MenuItem key={pt} value={pt}> {pt} </MenuItem>)}
+            </TextField>
           </Grid>
           <Grid item xs={12}>
             <Button variant="contained"> Create Order </Button>
@@ -84,5 +103,19 @@ function OrderForm() {
     </>
   );
 }
+
+OrderForm.propTypes = {
+  orderObj: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    phone: PropTypes.string,
+    email: PropTypes.string,
+    orderType: PropTypes.string,
+  }),
+};
+
+OrderForm.defaultProps = {
+  orderObj: initialState,
+};
 
 export default OrderForm;

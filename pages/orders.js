@@ -23,7 +23,7 @@ function Orders() {
       gap="0.5rem"
       alignItems="start"
     >
-      {orders.map((order) => <OrderCard orderObj={order} />)}
+      {orders.map((order) => <OrderCard orderObj={order} onUpdate={getAllTheOrders} />)}
     </Box>
   );
 }

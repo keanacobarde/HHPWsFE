@@ -7,10 +7,15 @@ import {
   IconButton,
   Card, Grid, CardContent, Typography, Button,
 } from '@mui/material';
+import { deleteOrder } from '../../API/OrderData';
 
-function OrderCard({ orderObj }) {
+function OrderCard({ orderObj, onUpdate }) {
   const router = useRouter();
-  const deleteThisOrder = () => {};
+  const deleteThisOrder = () => {
+    if (window.confirm(`Delete order ${orderObj.id}?`)) {
+      deleteOrder(orderObj.id).then(() => onUpdate());
+    }
+  };
 
   return (
     <Grid item xs={8} sm={6}>
@@ -21,9 +26,7 @@ function OrderCard({ orderObj }) {
           <Typography gutterBottom variant="h5" component="h2">
             {orderObj.name}
           </Typography>
-          <Typography>
-            {orderObj.status}
-          </Typography>
+          {orderObj.status ? <Typography>Open</Typography> : <Typography>Closed</Typography>}
           <Typography>
             {orderObj.phone}
           </Typography>
@@ -36,7 +39,7 @@ function OrderCard({ orderObj }) {
           <IconButton aria-label="delete" onClick={deleteThisOrder}>
             <DeleteIcon />
           </IconButton>
-          <IconButton aria-label="delete" onClick={() => router.push('/')}>
+          <IconButton aria-label="edit" onClick={() => router.push(`/orders/edit/${orderObj.id}`)}>
             <EditIcon />
           </IconButton>
           <Button size="small" onClick={() => router.push(`/orders/${orderObj.id}`)}>View Details</Button>
@@ -55,6 +58,7 @@ OrderCard.propTypes = {
     email: PropTypes.string.isRequired,
     orderType: PropTypes.string.isRequired,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default OrderCard;
