@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/router';
+import { createOrder } from '../../API/OrderData';
 
 const initialState = {
   name: '',
@@ -18,8 +20,12 @@ const orderTypes = ['Dine-in', 'Pickup', 'Delivery'];
 
 function OrderForm({ orderObj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const router = useRouter();
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createOrder(formInput).then(() => router.push('/'));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -96,7 +102,7 @@ function OrderForm({ orderObj }) {
             </TextField>
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained"> Create Order </Button>
+            <Button variant="contained" type="submit"> Create Order </Button>
           </Grid>
         </Grid>
       </Box>
