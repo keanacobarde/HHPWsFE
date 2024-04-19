@@ -38,7 +38,7 @@ function OrderDetails() {
         color="text.primary"
         gutterBottom
       >
-        Total: ${order.subtotal}
+        Total: ${order?.subtotal}
       </Typography>
       <Box
         display="grid"
@@ -51,7 +51,7 @@ function OrderDetails() {
         {items[0]?.items?.map((item) => <ItemCard itemObj={item} context="orderdetails" orderId={parseInt(id, 10)} onUpdate={getAllTheOrderItems} />)}
         <footer />
         <Button variant="contained" onClick={() => router.push(`/Items/${id}`)}>Add Item</Button>
-        <Button variant="contained"> Go to Payment </Button>
+        <Button variant="contained" onClick={() => router.push(`/paymentInfo/${id}`)}> Go to Payment </Button>
       </Box>
     </Stack>
   );
