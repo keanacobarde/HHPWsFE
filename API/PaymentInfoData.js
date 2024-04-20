@@ -23,7 +23,18 @@ const editOrderPaymentInfo = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getRevenue = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/revenue`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then((resp) => resolve(resp.json()))
+    .catch(reject);
+});
+
 export {
   getPaymentInfoByOrderId,
   editOrderPaymentInfo,
+  getRevenue,
 };
