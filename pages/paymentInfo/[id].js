@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PaymentInfoForm from '../../components/Forms/PaymentInfoForm';
-import getPaymentInfoByOrderId from '../../API/PaymentInfoData';
+import { getPaymentInfoByOrderId } from '../../API/PaymentInfoData';
 
 function PaymentInfo() {
   const [paymentInfo, setPaymentInfo] = useState([]);
@@ -17,7 +17,7 @@ function PaymentInfo() {
   }, []);
 
   return (
-    <PaymentInfoForm paymentInfoObj={paymentInfo} />
+    <PaymentInfoForm paymentInfoObj={{ ...paymentInfo, orderId: parseInt(id, 10) }} />
   );
 }
 

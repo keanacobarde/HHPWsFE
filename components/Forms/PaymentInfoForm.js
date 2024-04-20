@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/router';
+import { editOrderPaymentInfo } from '../../API/PaymentInfoData';
 
 const initialState = {
   tip: '',
@@ -15,7 +17,14 @@ const initialState = {
 const paymentTypes = ['Credit Card', 'Debit', 'Cash'];
 
 function PaymentInfoForm({ paymentInfoObj }) {
+  const router = useRouter();
   const [formInput, setFormInput] = useState(initialState);
+
+  useEffect(() => {
+    if (paymentInfoObj !== initialState) {
+      setFormInput(paymentInfoObj);
+    }
+  }, [paymentInfoObj]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,13 +34,18 @@ function PaymentInfoForm({ paymentInfoObj }) {
     }));
   };
 
-  const handleSubmit = () => {};
+  // append payment details to a given order
+  // close the given order
 
-  useEffect(() => {
-    if (paymentInfoObj !== initialState) {
-      setFormInput(paymentInfoObj);
-    }
-  }, [paymentInfoObj]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const payload = {
+      ...formInput,
+      status: false,
+      id: paymentInfoObj.orderId,
+    };
+    editOrderPaymentInfo(payload).then(() => router.push('/'));
+  };
 
   return (
     <>
@@ -70,7 +84,7 @@ function PaymentInfoForm({ paymentInfoObj }) {
             </TextField>
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained"> Close Order </Button>
+            <Button variant="contained" type="submit"> Close Order </Button>
           </Grid>
         </Grid>
       </Box>
@@ -80,6 +94,7 @@ function PaymentInfoForm({ paymentInfoObj }) {
 
 PaymentInfoForm.propTypes = {
   paymentInfoObj: PropTypes.shape({
+    orderId: PropTypes.number,
     tip: PropTypes.number,
     paymentType: PropTypes.string,
   }),
